@@ -1,33 +1,36 @@
 Checkpoint 0 Writeup
 ====================
 
-My name: [your name here]
+My name: Carmel Limcaoco
 
-My SUNet ID: [your sunetid here]
+My SUNet ID: cvlim
 
-I collaborated with: [list sunetids here]
+I collaborated with: Rachel Liu, Ari Barbella
 
-I would like to credit/thank these classmates for their help: [list sunetids here]
+I would like to credit/thank these classmates for their help: Rachel Liu, Ari Barbella
 
-This lab took me about [n] hours to do. I [did/did not] attend the lab session.
+This lab took me about [3] hours to do. I did attend the lab session.
 
-My secret code from section 2.1 was: [code here]
+My secret code from section 2.1 was: 498009
 
-I was surprised by or edified to learn that: [describe]
+I was surprised by or edified to learn that: Bytestreams can be implemented extremely simply and elegantly! I didn't expect using a string to work.
 
-Describe ByteStream implementation. [Describe data structures and
-approach taken. Describe alternative designs considered or tested.
-Describe benefits and weaknesses of your design compared with
-alternatives -- perhaps in terms of simplicity/complexity, risk of
-bugs, asymptotic performance, empirical performance, required
-implementation time and difficulty, and other factors. Include any
-measurements if applicable.]
+Describe ByteStream implementation. 
+
+I used a string as my bytestream, which made my implementation super simple.
+This was actually my initial idea, but then during lab I thought Keith called it dumb (haha).
+So I considered a couple other designs, firstly a queue, then a buffer or vector of chars. 
+I realized a queue wasn't optimal because you can't see a contiguous block which was
+a requirement of the peek() function. For a buffer or vector of chars, this felt a little
+too convoluted - and honestly I wanted to avoid using using pointers or overcomplicating with
+index numbers. I think my solution is elegant and very simple as compared to these other 
+alternatives, and because of that, is able to run quite quickly. It also was pretty quick to implement.
 
 Implementation Challenges:
-[]
+Had an issue with a minor edge case, but that's about it.
 
 Remaining Bugs:
-[]
+N/A
 
 - If applicable: I received help from a former student in this class,
   another expert, or a chatbot or other AI system (e.g. ChatGPT,
@@ -42,4 +45,3 @@ Remaining Bugs:
 
 - Optional: I contributed a new test case that catches a plausible bug
   not otherwise caught: [provide Pull Request URL]
-

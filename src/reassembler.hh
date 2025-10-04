@@ -1,12 +1,17 @@
 #pragma once
 
 #include "byte_stream.hh"
+#include <map>
+#include <string>
+#include <vector>
 
 class Reassembler
 {
 public:
   // Construct Reassembler to write into given ByteStream.
-  explicit Reassembler( ByteStream&& output ) : output_( std::move( output ) ) {}
+  explicit Reassembler( ByteStream&& output ) // removed size_t capacity
+    : output_( std::move( output ) ), waitlist_(), last_idx( UINT64_MAX )
+  {}
 
   /*
    * Insert a new substring to be reassembled into a ByteStream.
@@ -42,5 +47,12 @@ public:
   const Writer& writer() const { return output_.writer(); }
 
 private:
+  // Declare here in same order as the top!!
   ByteStream output_;
+  uint64_t capacity_ = output_.writer().available_capacity();
+  std::map<uint64_t, char> waitlist_; // Reassembler waitlist is a map of chars
+  uint64_t last_idx;
+
+  // bytes pushed is the first unassembled index = next_needed
+  // use a string for the reassembler, because substrings can overlap , 0-a 1-bcd, 2-cde
 };
