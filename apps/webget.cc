@@ -1,5 +1,6 @@
 #include "debug.hh"
-#include "socket.hh"
+#include "tcp_minnow_socket.hh"
+// #include "socket.hh"
 
 #include <cstdlib>
 #include <iostream>
@@ -14,7 +15,7 @@ void get_URL( const string& host, const string& path )
   // Identify the host address as the target server address, and http as the service
   Address server_address( host, "http" );
   // Create a TCP socket and connect to server at that address
-  TCPSocket socket;
+  CS144TCPSocket socket;
   socket.connect( server_address );
   // Create GET request string, and send to server via socket
   string request = "GET " + path + " HTTP/1.1\r\nHost: " + host + "\r\nConnection: close\r\n\r\n";
@@ -25,10 +26,9 @@ void get_URL( const string& host, const string& path )
     socket.read( buffer );
     cout << buffer;
   }
-  // debug( "Function called: get_URL( \"{}\", \"{}\" )", host, path );
-  // debug( "get_URL() function not yet implemented" );
+  socket.wait_until_closed();
 }
-} // namespace
+} 
 
 int main( int argc, char* argv[] )
 {
