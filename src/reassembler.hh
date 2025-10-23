@@ -1,23 +1,20 @@
-// CALL OUT: This is the lab solution for reassembler.hh, because mine was too slow and made my 
+// CALL OUT: This is the lab solution for reassembler.hh, because mine was too slow and made my
 // TCP receiver time out for the next checkpoint.
 // My original submission and solution is below this code, commented out.
 
 #pragma once
 #include "byte_stream.hh"
 #include <map>
+#include <optional>
 #include <string>
 #include <vector>
-#include <optional>
 
 class Reassembler
 {
 public:
   // Construct Reassembler to write into given ByteStream.
-  explicit Reassembler(ByteStream&& output) // initialize all members
-    : buf_()
-    , occupancy_()
-    , total_size_(std::nullopt)
-    , output_(std::move(output)) 
+  explicit Reassembler( ByteStream&& output ) // initialize all members
+    : buf_(), occupancy_(), total_size_( std::nullopt ), output_( std::move( output ) )
   {}
 
   /*

@@ -1,39 +1,39 @@
-// CALL OUT: This is the lab solution for reassembler.cc, because mine was too slow and made my 
+// CALL OUT: This is the lab solution for reassembler.cc, because mine was too slow and made my
 // TCP receiver time out for the next checkpoint.
 // My original submission and solution is below this code, commented out.
 
 #include "reassembler.hh"
 #include "debug.hh"
+#include <algorithm>
 #include <iostream>
 #include <map>
 #include <numeric>
-#include <algorithm>
 #include <ranges>
 
 using namespace std;
 
 void Reassembler::insert( uint64_t first_index, string data, bool is_last_substring )
 {
-  if (is_last_substring) {
+  if ( is_last_substring ) {
     total_size_.emplace( first_index + data.size() );
   }
 
   buf_.resize( writer().available_capacity() );
   occupancy_.resize( writer().available_capacity() );
 
-  const auto first_unassembled  = writer().bytes_pushed();
+  const auto first_unassembled = writer().bytes_pushed();
   const auto first_unacceptable = first_unassembled + writer().available_capacity();
 
-  const auto left_insert  = max( first_unassembled, first_index );
+  const auto left_insert = max( first_unassembled, first_index );
   const auto right_insert = min( first_unacceptable, first_index + data.size() );
 
   if ( left_insert < right_insert ) {
-    copy( data.begin() + (left_insert  - first_index),
-          data.begin() + (right_insert - first_index),
-          buf_.begin()  + (left_insert  - first_unassembled) );
+    copy( data.begin() + ( left_insert - first_index ),
+          data.begin() + ( right_insert - first_index ),
+          buf_.begin() + ( left_insert - first_unassembled ) );
 
-    fill( occupancy_.begin() + (left_insert  - first_unassembled),
-          occupancy_.begin() + (right_insert - first_unassembled),
+    fill( occupancy_.begin() + ( left_insert - first_unassembled ),
+          occupancy_.begin() + ( right_insert - first_unassembled ),
           true );
   }
 
@@ -51,7 +51,7 @@ void Reassembler::insert( uint64_t first_index, string data, bool is_last_substr
 
 uint64_t Reassembler::count_bytes_pending() const
 {
-  return accumulate( occupancy_.begin(), occupancy_.end(), uint64_t{0} ); // <-- 64-bit zero
+  return accumulate( occupancy_.begin(), occupancy_.end(), uint64_t { 0 } ); // <-- 64-bit zero
 }
 
 //  ORIGINAL SOLUTION: reassembler.cc

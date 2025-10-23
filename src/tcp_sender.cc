@@ -33,8 +33,8 @@ void TCPSender::push( const TransmitFunction& transmit )
 
     if ( !syn_sent_ ) { // set up connection if SYN was never sent.
       to_send.SYN = true;
-      syn_sent_ = true;                                            // set syn flag to be true
-      avail_space = ( avail_space > 0 ) ? ( avail_space - 1 ) : 0; 
+      syn_sent_ = true; // set syn flag to be true
+      avail_space = ( avail_space > 0 ) ? ( avail_space - 1 ) : 0;
     }
 
     uint64_t bytes_to_send = input_.reader().bytes_buffered();
