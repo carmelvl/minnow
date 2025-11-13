@@ -73,7 +73,6 @@ void NetworkInterface::recv_frame(EthernetFrame frame)
   if (frame.header.dst != ethernet_address_ && frame.header.dst != ETHERNET_BROADCAST) {
     return; // not for us
   }
-  // IPv4: parse and push up
   if (frame.header.type == EthernetHeader::TYPE_IPv4) {
     InternetDatagram datagram_in;
     Parser p(frame.payload);
@@ -83,7 +82,6 @@ void NetworkInterface::recv_frame(EthernetFrame frame)
     }
     return;
   }
-  // ARP
   if (frame.header.type == EthernetHeader::TYPE_ARP) {
     ARPMessage arp_msg;
     Parser p(frame.payload);
