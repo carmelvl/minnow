@@ -31,7 +31,18 @@ public:
   // Route packets between the interfaces
   void route();
 
+  struct RouteEntry {
+    uint32_t route_prefix;
+    uint8_t prefix_length;
+    std::optional<Address> next_hop;
+    size_t interface_num;
+  };
+
 private:
   // The router's collection of network interfaces
   std::vector<std::shared_ptr<NetworkInterface>> interfaces_ {};
+  
+  // initialize routing table, vec of RouteEntry structs
+  std::vector<RouteEntry> routing_table_ {};
+  
 };
