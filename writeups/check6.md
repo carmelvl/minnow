@@ -1,7 +1,7 @@
 Checkpoint 6 Writeup
 ====================
 
-My name: Carmel Limcaoco
+My name: Carmel Victoria Limcaoco
 
 My SUNet ID: cvlim
 
